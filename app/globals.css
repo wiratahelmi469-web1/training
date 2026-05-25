@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-calm-bg: #F5F4EF;
+  --color-calm-green: #A8B59A;
+  --color-calm-green-dark: #8C997E;
+  --color-calm-peach: #E8C7B7;
+  --color-calm-peach-dark: #D4B2A1;
+  --color-calm-border: #D9D6CE;
+  --color-calm-text-primary: #2B2B2B;
+  --color-calm-text-secondary: #6E6E6E;
+  
+  --animate-breathe: breathe 10s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(0.9);
+      opacity: 0.85;
+    }
+    50% {
+      transform: scale(1.15);
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-calm-bg);
+  color: var(--color-calm-text-primary);
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+/* Custom delicate scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #D9D6CE;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #A8B59A;
+}
+
+/* Base interactive overlays styling */
+.glass-panel {
+  background-color: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-calm-border);
+}
+
+.glass-panel-light {
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.pulsing-glow {
+  box-shadow: 0 0 25px rgba(168, 181, 154, 0.35);
+}

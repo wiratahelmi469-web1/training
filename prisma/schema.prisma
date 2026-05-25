@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String         @id @default(uuid())
+  name             String
+  email            String         @unique
+  avatar           String?
+  semester         String         @default("Semester 1")
+  stressLevel      Int            @default(5) // Scale 1 - 10
+  stressFactors    String[]       // Array of stressors
+  createdAt        DateTime       @default(now()) @map("created_at")
+  
+  chats            Chat[]
+  journals         JournalEntry[]
+  tasks            Task[]
+  analyticsRecords AnalyticsRecord[]
+
+  @@map("users")
+}
+
+model Chat {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  message   String   @db.Text
+  role      String   // "user" | "model"
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("chats")
+}
+
+model JournalEntry {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  mood      String   // "happy" | "calm" | "stressed" | "tired" | "sad" | "anxious"
+  gratitude String   @db.Text
+  content   String   @db.Text
+  tags      String[] // Tag labels
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("journal_entries")
+}
+
+model Task {
+  id            String   @id @default(uuid())
+  userId        String   @map("user_id")
+  title         String
+  breakdownJson String   @db.Text @map("breakdown_json") // JSON representing microtasks step-by-step
+  completed     Boolean  @default(false)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("tasks")
+}
+
+model AnalyticsRecord {
+  id           String   @id @default(uuid())
+  userId       String   @map("user_id")
+  weeklyScore  Int      @map("weekly_score")
+  burnoutRisk  String   @map("burnout_risk") // "Low" | "Moderate" | "High"
+  insight      String   @db.Text // AI generated insights
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("analytics")
+}
