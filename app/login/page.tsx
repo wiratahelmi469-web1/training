@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/context';
-import { Heart, Sparkles, Shield, UserCheck } from 'lucide-react';
+import { Brain, Sparkles, Shield, UserCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function LoginPage() {
@@ -48,7 +48,7 @@ export default function LoginPage() {
       >
         <div className="flex flex-col items-center text-center mb-8">
           <div className="w-14 h-14 bg-calm-green/20 rounded-2xl flex items-center justify-center text-calm-green-dark mb-4">
-            <Heart className="w-7 h-7 fill-calm-green/40" />
+            <Brain className="w-7 h-7 fill-calm-green/40" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-calm-text-primary">
             MindMate AI

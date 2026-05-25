@@ -73,13 +73,13 @@ export async function POST(req: NextRequest) {
       const { messages } = payload;
       
       // Look at the latest message for safety pre-screening.
-      const latestText = messages[messages.length - 1]?.content || "";
+      const latestText = messages[messages.length - 1]?.message || "";
       const isCrisis = hasCrisisKeywords(latestText);
 
       // We'll pass the chat history to the generateContent endpoint
       const formattedHistory = messages.map((m: any) => ({
         role: m.role === "user" ? "user" : "model",
-        parts: [{ text: m.content }],
+        parts: [{ text: m.message || "" }],
       }));
 
       // Set up the model query

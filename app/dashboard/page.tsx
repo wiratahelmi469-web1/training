@@ -315,8 +315,8 @@ export default function StudentDashboard() {
       {/* 1. LEFT SIDEBAR - Desktop Mode */}
       <aside className="hidden md:flex flex-col w-64 bg-white/70 backdrop-blur-md border-r border-[#D9D6CE] h-full p-6 shrink-0 z-20">
         <div className="flex items-center gap-3 mb-10">
-          <div className="w-8 h-8 bg-[#A8B59A] rounded-xl flex items-center justify-center">
-            <div className="w-4 h-4 bg-white rounded-full opacity-80"></div>
+          <div className="w-8 h-8 bg-calm-green rounded-lg flex items-center justify-center text-white">
+            <Brain className="w-4.5 h-4.5 fill-white/10" />
           </div>
           <span className="font-display font-bold text-xl tracking-tight text-[#2B2B2B]">MindMate AI</span>
         </div>
@@ -402,7 +402,7 @@ export default function StudentDashboard() {
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-calm-border flex items-center justify-between px-4 z-40">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-calm-green/20 rounded-lg flex items-center justify-center text-calm-green-dark">
-            <Heart className="w-4.5 h-4.5 fill-calm-green/30" />
+            <Brain className="w-4.5 h-4.5 fill-calm-green/35" />
           </div>
           <span className="font-display font-bold text-sm tracking-tight text-calm-text-primary">MindMate AI</span>
         </div>

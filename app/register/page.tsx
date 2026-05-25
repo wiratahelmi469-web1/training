@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/context';
-import { Heart, Sparkles, BookOpen } from 'lucide-react';
+import { Brain, Sparkles, BookOpen } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function RegisterPage() {
