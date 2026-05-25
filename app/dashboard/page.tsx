@@ -118,7 +118,7 @@ export default function StudentDashboard() {
   } = useAuth();
 
   useEffect(() => {
-    if (!user) {
+    if (!user || user.id === "student-guest") {
       router.push('/login');
     } else if (!isOnboarded) {
       router.push('/onboarding');

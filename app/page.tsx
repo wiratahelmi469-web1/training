@@ -46,8 +46,7 @@ export default function LandingHome() {
   }, [user, router]);
 
   const handleGuestQuickStart = () => {
-    guestMode();
-    router.push('/onboarding');
+    router.push('/register');
   };
 
   return (
@@ -240,17 +239,17 @@ export default function LandingHome() {
               onClick={handleGuestQuickStart}
               className="w-full sm:w-auto py-3.5 px-8 bg-calm-green hover:bg-calm-green-dark text-white font-bold rounded-2xl text-sm transition-all shadow-xs hover:shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-98"
             >
-              Mulai Sesi Anonim (Instan)
+              Mulai Sekarang — Daftar Gratis
               <ChevronRight className="w-4 h-4" />
             </button>
 
             {/* Secondary Button */}
             <button
               id="open_register_btn"
-              onClick={() => router.push('/register')}
+              onClick={() => router.push('/login')}
               className="w-full sm:w-auto py-3.5 px-8 bg-white hover:bg-calm-bg border border-calm-border/80 text-calm-text-primary text-sm font-bold rounded-2xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-98"
             >
-              Buat Profil Mahasiswa
+              Masuk ke Akun
             </button>
           </motion.div>
 
@@ -262,7 +261,7 @@ export default function LandingHome() {
             className="flex items-center gap-2 text-xs text-calm-text-secondary text-center select-none pt-2"
           >
             <Lock className="w-3.5 h-3.5 text-calm-green-dark" />
-            <span>100% anonim & terenkripsi</span>
+            <span>Pendaftaran aman & 100% rahasia</span>
           </motion.div>
         </div>
 
@@ -556,7 +555,7 @@ export default function LandingHome() {
                 onClick={handleGuestQuickStart}
                 className="inline-flex items-center gap-2 bg-calm-green hover:bg-calm-green-dark text-white text-xs font-bold py-3 px-6 rounded-xl transition shadow-xs hover:shadow-sm"
               >
-                Mulai Sesi Sekarang (Tanpa Akun)
+                Daftar Akun MindMate Sekarang
               </button>
             </div>
           </div>

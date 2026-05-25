@@ -60,7 +60,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Load from database on startup
   useEffect(() => {
-    const activeUser = LocalDb.getActiveUser();
+    let activeUser = LocalDb.getActiveUser();
+    // Invalidate guest users to enforce mandatory registration/login
+    if (activeUser && activeUser.id === "student-guest") {
+      activeUser = null;
+      LocalDb.setActiveUser(null);
+    }
     const onboarded = LocalDb.getIsOnboarded();
     const loadedChats = LocalDb.getChats();
     const loadedJournals = LocalDb.getJournals();

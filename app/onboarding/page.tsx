@@ -25,7 +25,7 @@ export default function OnboardingPage() {
   const [selectedFactors, setSelectedFactors] = useState<string[]>([]);
 
   useEffect(() => {
-    if (!user) {
+    if (!user || user.id === "student-guest") {
       router.push('/login');
     } else {
       setTimeout(() => {

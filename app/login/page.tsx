@@ -100,42 +100,21 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div className="relative my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-calm-border" />
+        <div className="mt-6 pt-4 border-t border-calm-border/60 flex flex-col gap-4 items-center">
+          <p className="text-center text-xs text-calm-text-secondary">
+            Belum punya akun?{" "}
+            <span 
+              onClick={() => router.push('/register')} 
+              className="text-calm-green-dark font-medium underline cursor-pointer"
+            >
+              Daftar di sini
+            </span>
+          </p>
+
+          <div className="flex items-center gap-2.5 justify-center text-center text-[11px] text-calm-text-secondary">
+            <Shield className="w-3.5 h-3.5 text-calm-green" />
+            <span>Privasimu terjaga. Obrolan tidak akan dibagikan ke pihak kampus.</span>
           </div>
-          <div className="relative flex justify-center text-xs">
-            <span className="px-3 bg-calm-bg text-calm-text-secondary rounded-full">Atau</span>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <button
-            id="btn_guest"
-            onClick={handleGuest}
-            type="button"
-            className="w-full py-3 px-4 bg-white/80 hover:bg-white border border-calm-border text-calm-text-primary text-sm font-medium rounded-2xl transition flex items-center justify-center gap-3 cursor-pointer"
-          >
-            <UserCheck className="w-4 h-4 text-calm-text-secondary" />
-            Lanjutkan Anonim (Cepat & Privat)
-          </button>
-
-          <button
-            id="btn_oauth"
-            onClick={handleGuest}
-            type="button"
-            className="w-full py-3 px-4 bg-white/40 hover:bg-white/60 border border-dashed border-calm-border text-calm-text-secondary text-xs rounded-2xl transition flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12.24 10.285V13.4h6.887C18.2 15.614 15.645 18 12.24 18c-3.86 0-7-3.14-7-7s3.14-7 7-7c1.78 0 3.32.67 4.5 1.77l2.454-2.454C17.636 1.845 15.11 1 12.24 1 6.584 1 2 5.584 2 11.24s4.584 10.24 10.24 10.24c5.795 0 10.24-4.065 10.24-10.24 0-.693-.08-1.36-.227-1.955H12.24z"/>
-            </svg>
-            Masuk Cepat dengan Google
-          </button>
-        </div>
-
-        <div className="mt-8 pt-4 border-t border-calm-border/60 flex items-center gap-2.5 justify-center text-center text-[11px] text-calm-text-secondary">
-          <Shield className="w-3.5 h-3.5 text-calm-green" />
-          <span>Privasimu terjaga. Obrolan tidak akan dibagikan ke pihak kampus.</span>
         </div>
       </motion.div>
     </div>
