@@ -32,7 +32,9 @@ export default function LoginPage() {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       if (params.get('reset') === 'success') {
-        setSuccessMsg('Password berhasil diubah. Silakan masuk dengan kata sandi baru Anda.');
+        setTimeout(() => {
+          setSuccessMsg('Password berhasil diubah. Silakan masuk dengan kata sandi baru Anda.');
+        }, 0);
       }
     }
   }, []);
@@ -187,7 +189,7 @@ export default function LoginPage() {
         {/* Left Side Quote block */}
         <div className="relative z-10 p-5 bg-white/45 backdrop-blur-md rounded-2xl border border-white/30 text-left">
           <p className="text-xs text-[#164436] font-medium leading-relaxed italic">
-            "Kamu tidak sendirian. Setiap tugas berat yang menghadang bisa kita lalui bersama-sama secara perlahan."
+            &ldquo;Kamu tidak sendirian. Setiap tugas berat yang menghadang bisa kita lalui bersama-sama secara perlahan.&rdquo;
           </p>
           <div className="mt-2.5 flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-calm-green" />

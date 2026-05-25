@@ -1263,6 +1263,23 @@ export default function StudentDashboard() {
                   </div>
                 </div>
 
+                {/* PROMINENT CONFIGURATION ACCESS */}
+                <div className="p-4 bg-indigo-50/70 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/40 rounded-2xl flex flex-col sm:flex-row gap-3 items-center justify-between">
+                  <div className="space-y-1 text-center sm:text-left">
+                    <p className="font-bold text-indigo-900 dark:text-indigo-300 text-xs">Pusat Setelan & Kredensial Lengkap</p>
+                    <p className="text-[#6E6E6E] dark:text-stone-300 text-[11px] leading-relaxed">
+                      Ubah nama panggilan, kustomisasi pengingat kognitif harian, ubah kata sandi rahasia lokal, atau ganti pilihan bahasa preferensi Anda.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => router.push('/settings')}
+                    className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shrink-0 cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>Masuk Setelan</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
                 <div className="space-y-4 text-xs">
                   {/* Account detail */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b border-slate-100 pb-4">

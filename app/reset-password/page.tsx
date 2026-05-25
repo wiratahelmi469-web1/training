@@ -25,7 +25,9 @@ export default function ResetPasswordPage() {
       const params = new URLSearchParams(window.location.search);
       const emailParam = params.get('email');
       if (emailParam) {
-        setEmail(emailParam);
+        setTimeout(() => {
+          setEmail(emailParam);
+        }, 0);
       }
     }
   }, []);

@@ -71,7 +71,7 @@ export default function SyaratKetentuanPage() {
           <section className="space-y-2">
             <h2 className="text-base font-bold text-calm-text-primary font-display">4. Penghapusan Seluruh Data</h2>
             <p className="leading-relaxed text-xs">
-              Kami mendukung penuh privasi modular. Melalui menu pengaturan dashboard, pengguna dapat mengeklik "Hapus Seluruh Data" untuk secara permanen memusnahkan semua chat, sejarah pernapasan, entri jurnal syukur, dan riwayat stress dari local storage peramban mereka seketika.
+              Kami mendukung penuh privasi modular. Melalui menu pengaturan dashboard, pengguna dapat mengeklik &ldquo;Hapus Seluruh Data&rdquo; untuk secara permanen memusnahkan semua chat, sejarah pernapasan, entri jurnal syukur, dan riwayat stress dari local storage peramban mereka seketika.
             </p>
           </section>
         </div>
