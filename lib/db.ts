@@ -51,6 +51,10 @@ export interface AnalyticsRecord {
   created_at: string;
 }
 
+export interface RegisteredUser extends User {
+  password?: string;
+}
+
 // Initial Mock Seed Data to make the app feel alive and populated out of the box!
 const DEFAULT_USER: User = {
   id: "student-1",
@@ -62,6 +66,13 @@ const DEFAULT_USER: User = {
   stress_factors: ["Deadlines", "Exam Stress", "Procrastination"],
   created_at: new Date().toISOString(),
 };
+
+const SEED_REGISTERED_USERS: RegisteredUser[] = [
+  {
+    ...DEFAULT_USER,
+    password: "password123",
+  }
+];
 
 const DEFAULT_CHATS: ChatMessage[] = [
   {
@@ -139,9 +150,25 @@ export class LocalDb {
     }
   }
 
+  // Registered Users Registry for custom accounts
+  static getRegisteredUsers(): RegisteredUser[] {
+    return this.get<RegisteredUser[]>("registered_users", SEED_REGISTERED_USERS);
+  }
+
+  static saveRegisteredUser(user: RegisteredUser): void {
+    const list = this.getRegisteredUsers();
+    const idx = list.findIndex(u => u.email.toLowerCase() === user.email.toLowerCase());
+    if (idx >= 0) {
+      list[idx] = user;
+    } else {
+      list.push(user);
+    }
+    this.set("registered_users", list);
+  }
+
   // Active User session
   static getActiveUser(): User | null {
-    return this.get<User | null>("user", DEFAULT_USER);
+    return this.get<User | null>("user", null);
   }
 
   static setActiveUser(user: User | null): void {
@@ -154,7 +181,7 @@ export class LocalDb {
   }
 
   static getIsOnboarded(): boolean {
-    return this.get<boolean>("isOnboarded", true); // Default true so the setup is clean, but customizable
+    return this.get<boolean>("isOnboarded", false); // Default false, onboarding required
   }
 
   // Chats

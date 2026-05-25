@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { User, ChatMessage, JournalEntry, Task, TaskItem, LocalDb } from './db';
+import { User, RegisteredUser, ChatMessage, JournalEntry, Task, TaskItem, LocalDb } from './db';
 
 let idCounter = 0;
 export function generateId(prefix: string): string {
@@ -20,8 +20,8 @@ interface AuthContextType {
   notifications: Array<{ id: string; text: string; type: string; read: boolean }>;
   
   // Auth actions
-  login: (email: string, name: string) => Promise<boolean>;
-  register: (email: string, name: string, semester: string) => Promise<boolean>;
+  login: (email: string, password?: string) => Promise<boolean>;
+  register: (email: string, name: string, password?: string, semester?: string) => Promise<boolean>;
   guestMode: () => void;
   onboardUser: (name: string, semester: string, stressLevel: number, factors: string[]) => void;
   logout: () => void;
@@ -98,40 +98,47 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   // Auth actions
-  const login = async (email: string, name: string): Promise<boolean> => {
-    const mockUser: User = {
+  const login = async (email: string, password?: string): Promise<boolean> => {
+    const list = LocalDb.getRegisteredUsers();
+    const found = list.find(u => u.email.toLowerCase() === email.toLowerCase());
+    if (found) {
+      if (password && found.password && found.password !== password) {
+        throw new Error("Password yang Anda masukkan salah. Silakan coba lagi.");
+      }
+      setUser(found);
+      setIsOnboarded(LocalDb.getIsOnboarded() || false);
+      LocalDb.setActiveUser(found);
+      setChats(LocalDb.getChats());
+      return true;
+    }
+    throw new Error("Akun dengan email ini tidak ditemukan. Silakan daftar terlebih dahulu.");
+  };
+
+  const register = async (email: string, name: string, password?: string, semester?: string): Promise<boolean> => {
+    const list = LocalDb.getRegisteredUsers();
+    const exists = list.some(u => u.email.toLowerCase() === email.toLowerCase());
+    if (exists) {
+      throw new Error("Email ini sudah terdaftar. Silakan masuk.");
+    }
+
+    const newUser: RegisteredUser = {
       id: "student-" + Math.random().toString(36).substr(2, 9),
-      name: name || "Teman Mahasiswa",
+      name: name,
       email: email,
-      avatar: `https://picsum.photos/seed/${name || 'mindmate'}/150`,
-      semester: "Semester 3",
+      password: password || "password123",
+      avatar: `https://picsum.photos/seed/${name}/150`,
+      semester: semester || "Semester 1",
       stress_level: 5,
       stress_factors: ["Academic Workload"],
       created_at: new Date().toISOString(),
     };
-    setUser(mockUser);
-    setIsOnboarded(true);
-    LocalDb.setActiveUser(mockUser);
-    // Reload database state
-    LocalDb.clearChats();
-    setChats(LocalDb.getChats());
-    return true;
-  };
 
-  const register = async (email: string, name: string, semester: string): Promise<boolean> => {
-    const mockUser: User = {
-      id: "student-" + Math.random().toString(36).substr(2, 9),
-      name: name,
-      email: email,
-      avatar: `https://picsum.photos/seed/${name}/150`,
-      semester: semester,
-      stress_level: 6,
-      stress_factors: ["Ujian", "Deadlines"],
-      created_at: new Date().toISOString(),
-    };
-    setUser(mockUser);
-    setIsOnboarded(true);
-    LocalDb.setActiveUser(mockUser);
+    LocalDb.saveRegisteredUser(newUser);
+
+    setUser(newUser);
+    setIsOnboarded(false);
+    LocalDb.setActiveUser(newUser);
+    LocalDb.set("isOnboarded", false);
     return true;
   };
 
